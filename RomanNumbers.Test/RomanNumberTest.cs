@@ -42,4 +42,31 @@ public class RomanNumberTest
         var suiteDeI = new string('I', (int) nombreUnités - 5);
         Assert.Equal("V" + suiteDeI, nombreRomain);
     }
+    [Fact(DisplayName = "ETANT DONNE le chiffre 9 " +
+                          "QUAND je le convertis en nombres romains " +
+                          "ALORS j'obtiens IX")]
+    public void TestNeuf()
+    {
+        const uint chiffreArabe = 9;
+
+        var nombreRomain = ConvertisseurNombresRomains.Convertir(chiffreArabe);
+
+        Assert.Equal("IX", nombreRomain);
+    }
+
+    [Theory(DisplayName = "ETANT DONNE un nombre <nombreUnités> compris entre 10 et 14" +
+                         "QUAND je le convertis en nombres romains " +
+                         "ALORS j'obtiens V plus <(nombreUnités-5)> fois I")]
+    [InlineData(10)]
+    [InlineData(11)]
+    [InlineData(12)]
+    [InlineData(13)]
+    public void TestDixPlusUnité(uint nombreUnités)
+    {
+        var nombreRomain = ConvertisseurNombresRomains.Convertir(nombreUnités);
+
+        var suiteDeI = new string('I', (int)nombreUnités - 5);
+        Assert.Equal("X" + suiteDeI, nombreRomain);
+    }
 }
+
